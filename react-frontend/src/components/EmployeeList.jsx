@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const ListEmployee = () => {
+export const EmployeeList = () => {
 	const [employees, setEmployees] = useState([]);
 
 	return (
