@@ -13,19 +13,33 @@ const AddEmployee = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 
-	const saveEmployee = e => {
+	const saveOrUpdateEmployee = e => {
 		e.preventDefault();
 
-		const employee = { firstName, lastName, emailAddress };
+		const employee = {
+			firstName,
+			lastName,
+			emailAddress,
+		};
 
-		EmployeeService.createEmployee(employee)
-			.then(response => {
-				console.log(response.data);
-				navigate('/employees');
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		if (id) {
+			EmployeeService.updateEmployee(id, employee)
+				.then(response => {
+					navigate('/employees');
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		} else {
+			EmployeeService.createEmployee(employee)
+				.then(response => {
+					console.log(response.data);
+					navigate('/employees');
+				})
+				.catch(err => {
+					console.log(err);
+				});
+		}
 	};
 
 	useEffect(() => {
@@ -46,7 +60,7 @@ const AddEmployee = () => {
 				<h2 className='text-center'>Update Employee</h2>
 			);
 		} else {
-			<h2 className='text-center'>Add Employee</h2>;
+			return <h2 className='text-center'>Add Employee</h2>;
 		}
 	};
 
@@ -106,7 +120,7 @@ const AddEmployee = () => {
 								</div>
 								<button
 									className='btn btn-success'
-									onClick={e => saveEmployee(e)}>
+									onClick={e => saveOrUpdateEmployee(e)}>
 									Submit
 								</button>
 								<Link
