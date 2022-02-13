@@ -19,7 +19,11 @@ export const EmployeeList = () => {
 	return (
 		<div className='container'>
 			<h2 className='text-center'>List of Employees</h2>
-			<Link to ="/add-employee" className="btn btn-primary mb-2">Add Employee</Link>
+			<Link
+				to='/add-employee'
+				className='btn btn-primary mb-2'>
+				Add Employee
+			</Link>
 			<table className='table table-bordered table-striped'>
 				<thead>
 					<th>Employee ID</th>
@@ -34,6 +38,13 @@ export const EmployeeList = () => {
 							<td>{employee.firstName}</td>
 							<td>{employee.lastName}</td>
 							<td>{employee.emailAddress}</td>
+							<td>
+								<Link
+									className='btn btn-info'
+									to={`/edit-employee/${employee.id}`}>
+									Update
+								</Link>
+							</td>
 						</tr>
 					))}
 				</tbody>
